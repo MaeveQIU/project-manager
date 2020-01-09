@@ -134,15 +134,15 @@ table td {
   -webkit-box-orient: vertical;
 }
 
-.status-active  {
+.active  {
   color: #666666;
 }
 
-.status-pending {
+.pending {
   color: #ee706d;
 }
 
-.status-closed {
+.closed {
   color: #f7da74
 }
 

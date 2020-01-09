@@ -10,47 +10,40 @@
       <div class="all">
         <p class="mission">所有任务</p>
         <p class="live">实时</p>
-        <p class="count">3,841</p>
+        <p class="count" id="all-count">3,841</p>
         <span class="iconfont">&#xe60c;</span>
       </div>
       <div class="unsolved">
-        <p class="mission">未解决</pclass="mission">
+        <p class="mission">未解决</p>
         <p class="live">实时</p>
-        <p class="count">2,305</p>
-        <p class="percentage">60%</p>
+        <p class="count" id="unsolved-count">2,305</p>
+        <p class="percentage" id="unsolved-percentage">60%</p>
         <span class="iconfont">&#xe651;</span>
       </div>
       <div class="solving">
         <p class="mission">处理中</p>
         <p class="live">实时</p>
-        <p class="count">384</p>
-        <p class="percentage">10%</p>
+        <p class="count" id="solving-count">384</p>
+        <p class="percentage" id="solving-percentage">10%</p>
         <span class="iconfont">&#xe615;</span>
       </div>
       <div class="solved">
         <p class="mission">已解决</p>
         <p class="live">实时</p>
-        <p class="count">1,152</p>
-        <p class="percentage">30%</p>
+        <p class="count" id="solved-count">1,152</p>
+        <p class="percentage" id="solved-percentage">30%</p>
         <span class="iconfont">&#xe614;</span>
       </div>
     </section>
     <section class="projects">
       <p class="list">项目列表</p>
-      <table>
+      <table id="project-table">
         <tr class="header">
           <th class="title-header">项目名称</th>
           <th class="description-header">项目描述</th> 
           <th class="deadline-header">截止时间</th>
           <th class="status-header">状态</th>
           <th class="delete-header">操作</th>
-        </tr>
-        <tr>
-          <td class="title">react-native</td>
-          <td class="description" title="Full Text">这个是 Facebook 在 React.js Conf 2015 大会上推出的基于 JavaScript 的开源框架 React Native, 该框架结合了 Web 应用和 Native 应用的优势, 可以使用 JavaScript 来开发 iOS 和 Android 原生应用</td> 
-          <td class="deadline">2018-12-01</td>
-          <td class="status-active">ACTIVE</td>
-          <td><button type="button" class="delete">删除</button></td>
         </tr>
       </table>
     </section>
