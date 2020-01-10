@@ -74,10 +74,15 @@ const showDeleteBox = () => {
   <p class="question">确认删除该项目吗？</p>
   <button type="button" id="confirm">确认</button>
   <button type="button" id="cancel">取消</button>`
+
+  const filter = document.createElement("div");
+  filter.setAttribute("id", "background");
+  document.querySelector("body").appendChild(filter);
 }
 
 const disappearDeleteBox = () => {
   document.getElementById("delete-box").remove();
+  document.getElementById("background").remove();
 }
 
 const deleteItem = temp => {
