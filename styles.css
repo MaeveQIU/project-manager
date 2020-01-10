@@ -20,7 +20,7 @@ body {
   top: 5px;
   left: 20px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 600;;
 }
 
 .live {
@@ -159,3 +159,81 @@ table td {
 .delete:hover {
   cursor: pointer;
 }
+
+#delete-box {
+  width: 340px;
+  position: fixed;
+  bottom: 270px;
+  left: 535px;
+  padding: 22px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+/* .background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+} */
+
+section span:first-child {
+  font-size: 24px;
+  color: #f1c826;
+  position: absolute;
+  top: 45px;
+  left: 10px;
+}
+
+section span:nth-child(2) {
+  font-size: 16px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+section span:nth-child(2):hover {
+  cursor: pointer;
+}
+
+.notification {
+  color: #333;
+  font-size: 20px;
+  line-height: 24px;
+  margin-left: 20px;
+}
+
+.question {
+  color: #666;
+  margin-top: 8px;
+  font-size: 14px;
+  margin-left: 20px;
+}
+
+.confirm {
+  background-color: #3080fe;
+  color: #fff;
+  font-size: 13px;
+  border-radius: 3px;
+  padding: 7px 11px;
+  position: relative;
+  left: 220px;
+  outline: none;
+}
+
+.cancel {
+  font-size: 13px;
+  padding: 7px 11px;
+  border-radius: 3px;
+  position: relative;
+  left: 230px;
+  outline: none;
+}
+
+
+
