@@ -1,11 +1,12 @@
-// window.onload = () => {
-//   let listData = getData();
-//   renderList(listData);
-//   renderSummary(listData);
-// }
+window.onload = () => {
+  const listData = getData();
+  renderList(listData);
+  renderSummary(listData);
+  addEvents();
+}
 
-let getData = () => {
-  let xhr = new XMLHttpRequest();
+const getData = () => {
+  const xhr = new XMLHttpRequest();
   xhr.open("GET", "http://localhost:3000/projects", false);
   xhr.send();
   if (xhr.readyState === 4 && xhr.status === 200) {
@@ -13,18 +14,15 @@ let getData = () => {
   }
 }
 
-let deleteData = (item) => {
-  let xhr = new XMLHttpRequest();
+const deleteData = item => {
+  const xhr = new XMLHttpRequest();
   xhr.open("DELETE", `http://localhost:3000/projects/${item}`, false);
   xhr.send();
-  if (xhr.readyState === 4 && xhr.status === 200) {
-    return JSON.parse(xhr.responseText);
-  }
 }
 
-let renderList = (listData) => {
+const renderList = listData => {
   listData.forEach(element => {
-    let newRow = document.createElement("tr");
+    const newRow = document.createElement("tr");
     document.getElementById("project-table").appendChild(newRow);
     newRow.innerHTML = `
     <td class="title">${element.name}</td>
@@ -35,7 +33,7 @@ let renderList = (listData) => {
   });
 }
 
-let calculateCount = (listData) => {
+const calculateCount = listData => {
   let summaryArr = [];
   let [all, unsolved, solving, solved] = [0, 0, 0, 0];
   listData.forEach(element => {
@@ -54,23 +52,19 @@ let calculateCount = (listData) => {
   return summaryArr;
 }
 
-let renderSummary = (listData) => {
-  let arr = calculateCount(listData);
+const renderSummary = listData => {
+  const arr = calculateCount(listData);
   document.getElementById("all-count").innerHTML = arr[0];
   document.getElementById("unsolved-count").innerHTML = arr[1][0];
-  document.getElementById("unsolved-percentage").innerHTML = `${Math.floor(arr[1][1] * 100)}%`;
+  document.getElementById("unsolved-percentage").innerHTML = `${Math.round(arr[1][1] * 100)}%`;
   document.getElementById("solving-count").innerHTML = arr[2][0];
-  document.getElementById("solving-percentage").innerHTML = `${Math.floor(arr[2][1] * 100)}%`;
+  document.getElementById("solving-percentage").innerHTML = `${Math.round(arr[2][1] * 100)}%`;
   document.getElementById("solved-count").innerHTML = arr[3][0];
-  document.getElementById("solved-percentage").innerHTML = `${Math.floor(arr[3][1] * 100)}%`;
+  document.getElementById("solved-percentage").innerHTML = `${Math.round(arr[3][1] * 100)}%`;
 }
 
-let listData = getData();
-renderList(listData);
-renderSummary(listData);
-
-let showDeleteBox = () => {
-  let box = document.createElement("section");
+const showDeleteBox = () => {
+  const box = document.createElement("section");
   box.setAttribute("id", "delete-box");
   document.querySelector("body").appendChild(box);
   box.innerHTML = `
@@ -78,38 +72,34 @@ let showDeleteBox = () => {
   <span class="iconfont" id="close">&#xe600;</span>
   <p class="notification">提示</p>
   <p class="question">确认删除该项目吗？</p>
-  <button type="button" class="confirm" id="confirm">确认</button>
-  <button type="button" class="cancel" id="cancel">取消</button>`
+  <button type="button" id="confirm">确认</button>
+  <button type="button" id="cancel">取消</button>`
 }
-  
 
-let cancelEvent = () => {
+const disappearDeleteBox = () => {
   document.getElementById("delete-box").remove();
 }
 
-let deleteItem = (temp) => {
+const deleteItem = temp => {
   deleteData(temp.id);
   temp.parentNode.parentNode.remove();
-  document.getElementById("delete-box").remove();
-  let listData = getData();
-  calculateCount(listData);
-  renderSummary(listData);
 }
 
-let tempEvent = (event) => {
-  return event.target;
+const addEvents = () => {
+  const tempEvent = event => event.target;
+  let temp;
+  document.addEventListener("click", event => {
+    if (event.target.innerText === "删除") {
+      showDeleteBox();
+      temp = tempEvent(event);
+    }
+    if (event.target.id === "cancel" || event.target.id === "close") {
+      disappearDeleteBox();
+    }
+    if (event.target.id === "confirm") {
+      deleteItem(temp);
+      disappearDeleteBox();
+      renderSummary(getData());
+    }
+  });
 }
-
-document.addEventListener("click", (event) => {
-  // let temp;
-  if (event.target.innerText === "删除") {
-    showDeleteBox();
-    temp = tempEvent(event);
-  }
-  if (event.target.id === "cancel" || event.target.id === "close") {
-    cancelEvent();
-  }
-  if (event.target.id === "confirm") {
-    deleteItem(temp);
-  }
-});

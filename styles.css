@@ -215,7 +215,7 @@ section span:nth-child(2):hover {
   margin-left: 20px;
 }
 
-.confirm {
+#confirm {
   background-color: #3080fe;
   color: #fff;
   font-size: 13px;
@@ -226,7 +226,7 @@ section span:nth-child(2):hover {
   outline: none;
 }
 
-.cancel {
+#cancel {
   font-size: 13px;
   padding: 7px 11px;
   border-radius: 3px;
@@ -234,6 +234,3 @@ section span:nth-child(2):hover {
   left: 230px;
   outline: none;
 }
-
-
-
