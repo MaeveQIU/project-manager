@@ -36,15 +36,29 @@
       </div>
     </section>
     <section class="projects">
-      <p class="list">项目列表</p>
+      <div class="outer-box">
+        <p class="list">项目列表</p>
+        <div class="search">
+          <input type="text" id="search-area" placeholder="请输入项目名中的关键字进行搜索">
+          <span class="iconfont icon-sousuo" id="search-button"></span>
+        </div>
+      </div>
       <table id="project-table">
-        <tr class="header">
-          <th class="title-header">项目名称</th>
-          <th class="description-header">项目描述</th> 
-          <th class="deadline-header">截止时间</th>
-          <th class="status-header">状态</th>
-          <th class="delete-header">操作</th>
-        </tr>
+        <thead>
+          <tr class="header">
+            <th class="title-header">项目名称</th>
+            <th class="description-header">项目描述</th> 
+            <th class="deadline-header">
+              截止时间
+              <span class="iconfont icon-shengxu" id="asc"></span>
+              <span class="iconfont icon-jiangxu1" id="desc"></span>
+            </th>
+            <th class="status-header">状态</th>
+            <th class="delete-header">操作</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>  
       </table>
     </section>
     <script type="text/javascript" src="./scripts.js"></script>

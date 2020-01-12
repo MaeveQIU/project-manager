@@ -23,7 +23,7 @@ const deleteData = item => {
 const renderList = listData => {
   listData.forEach(element => {
     const newRow = document.createElement("tr");
-    document.getElementById("project-table").appendChild(newRow);
+    document.getElementById("table-body").appendChild(newRow);
     newRow.innerHTML = `
     <td class="title">${element.name}</td>
     <td class="description" title="${element.description}">${element.description}</td> 
@@ -64,9 +64,13 @@ const renderSummary = listData => {
 }
 
 const showDeleteBox = () => {
+  const filter = document.createElement("div");
+  filter.setAttribute("id", "background");
+  document.querySelector("body").appendChild(filter);
+
   const box = document.createElement("section");
   box.setAttribute("id", "delete-box");
-  document.querySelector("body").appendChild(box);
+  document.getElementById("background").appendChild(box);
   box.innerHTML = `
   <span class="iconfont">&#xe60a;</span>
   <span class="iconfont" id="close">&#xe600;</span>
@@ -74,10 +78,6 @@ const showDeleteBox = () => {
   <p class="question">确认删除该项目吗？</p>
   <button type="button" id="confirm">确认</button>
   <button type="button" id="cancel">取消</button>`
-
-  const filter = document.createElement("div");
-  filter.setAttribute("id", "background");
-  document.querySelector("body").appendChild(filter);
 }
 
 const disappearDeleteBox = () => {
@@ -88,6 +88,33 @@ const disappearDeleteBox = () => {
 const deleteItem = temp => {
   deleteData(temp.id);
   temp.parentNode.parentNode.remove();
+}
+
+const clearList = () => {
+  document.getElementById("table-body").innerHTML = "";
+}
+
+const sortList = (data, order) => {
+  if (order === "asc") {
+    return data.sort((x, y) => (x.endTime < y.endTime) ? -1: 1)
+  }
+  else if (order === "desc") {
+    return data.sort((x, y) => (x.endTime > y.endTime) ? -1: 1)
+  }
+}
+
+const changeColor = (order, anotherOrder) => {
+  document.getElementById(order).setAttribute("style", "color: #3080fe");
+  document.getElementById(anotherOrder).setAttribute("style", "color: #aaa");
+}
+
+const searchKeyWord = () => {
+  let word = document.getElementById("search-area").value;
+  let list = getData();
+  if (word !== "") {
+    return list.filter(element => element.name.indexOf(word) !== -1);
+  }
+  return list;
 }
 
 const addEvents = () => {
@@ -105,6 +132,27 @@ const addEvents = () => {
       deleteItem(temp);
       disappearDeleteBox();
       renderSummary(getData());
+    }
+    if (event.target.id === "asc") {
+      clearList();
+      renderList(sortList(getData(), "asc"));
+      changeColor("asc", "desc");
+    }
+    if (event.target.id === "desc") {
+      clearList();
+      renderList(sortList(getData(), "desc"));
+      changeColor("desc", "asc");
+    }
+    if (event.target.id === "search-button"){
+      clearList();
+      renderList(searchKeyWord());
+    }
+  });
+
+  document.getElementById("search-area").addEventListener("keydown", event => {
+    if (event.keyCode === 13) {
+      clearList();
+      renderList(searchKeyWord());
     }
   });
 }
